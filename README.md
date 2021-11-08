@@ -15,7 +15,7 @@
 - **Solana** for **encryption**
 
 
-**⚛️React Native** is used due to it's fast development time and ability to scale to a variety of different devices easily
+**⚛️React Native** is used due to its fast development time and ability to scale to a variety of different devices easily
 
 **🖥️NodeJs** is used because the rest of this project is coded using **Javascript**
 
@@ -34,18 +34,31 @@ one more through the use of the Solana blockchain's data encryption abilities. T
 <p align="center">
 <img src="https://github.com/hwr7dd/cryptdash/blob/main/diagramsmall.png") 
 </p>
- 
+
+###### ****Note: This project is focused around software and not hardware. You may need more components to make a usable replication of this project.  
+
 ## Hardware
  
-*This project is focused around software and not hardware. You may need more components to make a usable replication of this project. 
  
- #### For this project I use the following hardware:
+#### For this project I use the following hardware:
 
 - **1** x Rasberry Pi Model 3B (Or wifi capable PCB with SD card memory** * and **at least one:** GPIO, Ground, 3V)
 
 - **1** x DHT11 Temp/Humidity Sensor (I used DHT11 because they were cheaper to replace)
  
+## Installing the IoT Server on Rasberry Pi
  
+First clone this repo to your Rasberry Pi. Download and install the executable to the Rasberry Pi. Leave the Rasberry Pi on at all times. If this is the first time a user has
+logged, they will be prompted to create a username and password to login to the server.
+ 
+## SSH into Rasberry Pi
+ 
+The Rasberry Pi will display an I.P. address that you can access using the program "PuTTy" to access the Rasberry Pi from the open-web. 
+ 
+## A note on device setup
+
+This project is designed around a Rasberry Pi that has a specific configuration of GPIO, Ground, and 5V pin locations and as such you may need to configure your pin setup 
+in the Python files run via the Rasberry Pi IoT Server. 
 
  ### Icons/Graphic Attribution:
 - <a href="https://iconscout.com/icons/thermometer" target="_blank">Thermometer Icon</a> by <a href="https://iconscout.com/contributors/eva-icons">Akveo</a> on <a href="https://iconscout.com">Iconscout</a>
