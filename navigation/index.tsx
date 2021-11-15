@@ -9,13 +9,15 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
-
+import logo from '../assets/images/logo.png';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
+import Home from '../screens/Home';
+
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import ControlPanel from '../screens/ControlPanel';
+import Schedules from '../screens/Schedules';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -35,6 +37,8 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+
+
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -53,21 +57,62 @@ function RootNavigator() {
  */
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
+
+
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const tintColorLight = '#2f95dc';
 
   return (
-    <BottomTab.Navigator
-      initialRouteName="TabOne"
+     <BottomTab.Navigator
+      initialRouteName="ControlPanel"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        
       }}>
+         <BottomTab.Screen
+        name="Home"
+        component={Home}
+        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          tabBarStyle: { backgroundColor: '#2BB673' },
+          tabBarBadge: 3,
+          headerTitle: ()=>(
+            <Pressable
+            onPress={() => navigation.navigate('Home')}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+            })}>
+            <img
+            src={logo}
+            style={{height:60,width:70, alignContent:'center'}}
+          />
+          </Pressable>
+
+          ),
+
+        })}
+      />
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        name="ControlPanel"
+        component={ControlPanel}
+        options={({ navigation }: RootTabScreenProps<'ControlPanel'>) => ({
+          headerTitle: ()=>(
+            <Pressable
+            onPress={() => navigation.navigate('Home')}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+            })}>
+            <img
+            src={logo}
+            style={{height:60,width:70, alignContent:'center'}}
+          />
+          </Pressable>
+
+          ),
+          tabBarStyle: { backgroundColor: '#2BB673' },
+
+          tabBarIcon: ({ color }) => <TabBarIcon name="sliders" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -85,12 +130,27 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+        name="Schedules"
+        component={Schedules}
+        options={({ navigation }: RootTabScreenProps<'Schedules'>) => ({
+          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color}  />,
+          tabBarStyle: { backgroundColor: '#2BB673' },
+          
+          headerTitle: ()=>(
+            <Pressable
+            onPress={() => navigation.navigate('Home')}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+            })}>
+            <img
+            src={logo}
+            style={{height:60,width:70, alignContent:'center'}}
+          />
+          </Pressable>
+
+          ),
+
+        })}
       />
     </BottomTab.Navigator>
   );
