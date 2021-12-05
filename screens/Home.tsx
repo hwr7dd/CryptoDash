@@ -7,7 +7,7 @@ import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import {Button} from 'react-native'
 
-export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
+export default function Home() {
   const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
 
     const [isLoginVisible, setIsVisible] = useState(true);
@@ -55,12 +55,12 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
         </View>
       </View>
        :   <View style={styles.buttoncont}>
-       <View style={styles.buttonitems}>
-         <Button style={styles.buttonitems} title="Log In" onPress={toggleFunction} />
-       </View>
-       <View style={styles.buttonitems}>
-         <Button   title="Register" onPress={toggleFunction} />
-       </View>
+              <View style={styles.buttonitems}>
+                <Button  title="Log In2" onPress={toggleFunction} />
+              </View>
+           <View style={styles.buttonitems}>
+              <Button color="#2BB673"  title="Register" onPress={toggleFunction} />
+           </View>
      </View>}   
     </View>
   );
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   logout:{
     marginBottom:30
   },
+
   canvas:{
     flexDirection:'row',
     flex:1,
@@ -123,6 +124,7 @@ const styles = StyleSheet.create({
     margin:20,
     fontSize:15
   },
+  
   separator: {
     marginVertical: 30,
     height: 1,
