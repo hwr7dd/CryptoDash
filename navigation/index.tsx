@@ -3,29 +3,42 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
-import logo from '../assets/images/logo.png';
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
-import Home from '../screens/Home';
+import { FontAwesome } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as React from "react";
+import { ColorSchemeName, Pressable } from "react-native";
+import logo from "../assets/images/logo.png";
+import Colors from "../constants/Colors";
+import useColorScheme from "../hooks/useColorScheme";
+import ModalScreen from "../screens/ModalScreen";
+import Home from "../screens/Home";
 
-import NotFoundScreen from '../screens/NotFoundScreen';
-import ControlPanel from '../screens/ControlPanel';
-import Schedules from '../screens/Schedules';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
-import LinkingConfiguration from './LinkingConfiguration';
+import NotFoundScreen from "../screens/NotFoundScreen";
+import ControlPanel from "../screens/ControlPanel";
+import Schedules from "../screens/Schedules";
+import {
+  RootStackParamList,
+  RootTabParamList,
+  RootTabScreenProps,
+} from "../types";
+import LinkingConfiguration from "./LinkingConfiguration";
 
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+export default function Navigation({
+  colorScheme,
+}: {
+  colorScheme: ColorSchemeName;
+}) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+    >
       <RootNavigator />
     </NavigationContainer>
   );
@@ -37,14 +50,20 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-
-
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+      <Stack.Screen
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFoundScreen}
+        options={{ title: "Oops!" }}
+      />
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
@@ -57,99 +76,115 @@ function RootNavigator() {
  */
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
-
-
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-  const tintColorLight = '#2f95dc';
+  const tintColorLight = "#2f95dc";
 
   return (
-     <BottomTab.Navigator
+    <BottomTab.Navigator
       initialRouteName="ControlPanel"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
-        
-      }}>
-         <BottomTab.Screen
+      }}
+    >
+      <BottomTab.Screen
         name="Home"
         component={Home}
-        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+        options={({ navigation }: RootTabScreenProps<"Home">) => ({
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          tabBarStyle: { backgroundColor: '#2BB673' },
-          tabBarBadge: 3,
-          headerTitle: ()=>(
+          tabBarStyle: { backgroundColor: "#2BB673" },
+          headerTitle: () => (
             <Pressable
-            onPress={() => navigation.navigate('Home')}
-            style={({ pressed }) => ({
-              opacity: pressed ? 0.5 : 1,
-            })}>
-            <img
-            src={logo}
-            style={{height:60,width:70, alignContent:'center'}}
-          />
-          </Pressable>
-
-          ),
-
-        })}
-      />
-      <BottomTab.Screen
-        name="ControlPanel"
-        component={ControlPanel}
-        options={({ navigation }: RootTabScreenProps<'ControlPanel'>) => ({
-          headerTitle: ()=>(
-            <Pressable
-            onPress={() => navigation.navigate('Home')}
-            style={({ pressed }) => ({
-              opacity: pressed ? 0.5 : 1,
-            })}>
-            <img
-            src={logo}
-            style={{height:60,width:70, alignContent:'center'}}
-          />
-          </Pressable>
-
-          ),
-          tabBarStyle: { backgroundColor: '#2BB673' },
-
-          tabBarIcon: ({ color }) => <TabBarIcon name="sliders" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={() => navigation.navigate("Home")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
+              })}
+            >
+              <img
+                src={logo}
+                style={{ height: 60, width: 70, alignContent: "center" }}
               />
             </Pressable>
           ),
         })}
       />
       <BottomTab.Screen
+        name="ControlPanel"
+        component={ControlPanel}
+        options={({ navigation }: RootTabScreenProps<"ControlPanel">) => ({
+          headerTitle: () => (
+            <Pressable
+              onPress={() => navigation.navigate("Home")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <img
+                src={logo}
+                style={{ height: 60, width: 70, alignContent: "center" }}
+              />
+            </Pressable>
+          ),
+          tabBarStyle: { backgroundColor: "#2BB673" },
+          tabBarBadge: 3,
+
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="sliders" color={color} />
+          ),
+          // headerRight: () => (
+          //   <Pressable
+          //     onPress={() => navigation.navigate("Modal")}
+          //     style={({ pressed }) => ({
+          //       opacity: pressed ? 0.5 : 1,
+          //     })}
+          //   >
+          //     <FontAwesome
+          //       name="info-circle"
+          //       size={25}
+          //       color={Colors[colorScheme].text}
+          //       style={{ marginRight: 15 }}
+          //     />
+          //   </Pressable>
+          // ),
+        })}
+      />
+      <BottomTab.Screen
         name="Schedules"
         component={Schedules}
-        options={({ navigation }: RootTabScreenProps<'Schedules'>) => ({
-          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color}  />,
-          tabBarStyle: { backgroundColor: '#2BB673' },
-          
-          headerTitle: ()=>(
-            <Pressable
-            onPress={() => navigation.navigate('Home')}
-            style={({ pressed }) => ({
-              opacity: pressed ? 0.5 : 1,
-            })}>
-            <img
-            src={logo}
-            style={{height:60,width:70, alignContent:'center'}}
-          />
-          </Pressable>
-
+        options={({ navigation }: RootTabScreenProps<"Schedules">) => ({
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="calendar" color={color} />
           ),
+          tabBarStyle: { backgroundColor: "#2BB673" },
 
+          headerTitle: () => (
+            <Pressable
+              onPress={() => navigation.navigate("Home")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <img
+                src={logo}
+                style={{ height: 60, width: 70, alignContent: "center" }}
+              />
+            </Pressable>
+          ),
+          // headerRight: () => (
+          //   <Pressable
+          //     onPress={() => navigation.navigate("Modal")}
+          //     style={({ pressed }) => ({
+          //       opacity: pressed ? 0.5 : 1,
+          //     })}
+          //   >
+          //     <FontAwesome
+          //       name="info-circle"
+          //       size={25}
+          //       color={Colors[colorScheme].text}
+          //       style={{ marginRight: 15 }}
+          //     />
+          //   </Pressable>
+          // ),
         })}
       />
     </BottomTab.Navigator>
@@ -160,7 +195,7 @@ function BottomTabNavigator() {
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;

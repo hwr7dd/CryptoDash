@@ -1,15 +1,23 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { useState } from "react";
+import { StyleSheet } from "react-native";
+import { Text, View } from "../components/Themed";
+import Scheduler from "../components/table";
+import { RootTabScreenProps } from "../types";
+import { Button } from "react-native";
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-
-export default function Schedules() {
+export default function Schedules({
+  navigation,
+}: RootTabScreenProps<"Schedules">) {
+  let selectedDate: Date = new Date("2021-01-01");
+  const [dateData, setDateData] = useState<Date>(selectedDate);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Schedules</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/Schedules.tsx" />
+      <Scheduler />
+      {/* <Button title="Test" onPress={() => navigation.navigate("Modal")}>
+        test
+      </Button> */}
     </View>
   );
 }
@@ -17,16 +25,16 @@ export default function Schedules() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: "80%",
   },
 });
