@@ -4,14 +4,16 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Header } from "react-native/Libraries/NewAppScreen";
 //@ts-ignore
 import { withAuthenticator } from "aws-amplify-react-native";
-
+import awsconfig from "./src/aws-exports";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
+import Amplify, { Auth } from "aws-amplify";
 
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  Amplify.configure(awsconfig);
 
   if (!isLoadingComplete) {
     return null;

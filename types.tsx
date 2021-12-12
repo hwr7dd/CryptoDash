@@ -17,7 +17,6 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
-
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: { id: number };
