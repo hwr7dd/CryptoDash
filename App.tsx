@@ -4,7 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Header } from "react-native/Libraries/NewAppScreen";
 //@ts-ignore
 import { withAuthenticator } from "aws-amplify-react-native";
-import awsconfig from "./src/aws-exports";
+import awsconfig from "C:/Users/seaha/Desktop/CryptoDash/src/aws-exports.js";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
