@@ -8,7 +8,7 @@ import { useState, useRef } from "react";
 import * as React from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useEffect } from "react";
-import { Modal } from "../components/modeal";
+import { Modal } from "../components/Modeal";
 import { DataTable } from "react-native-paper";
 import { FAB } from "react-native-elements";
 import { local } from "d3";
