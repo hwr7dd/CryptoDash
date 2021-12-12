@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import Charted from "../components/barchart";
-import Pied from "../components/Piechart";
+import Pied from "../components/piechart";
 // import DeviceOn from "../components/turnon";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
