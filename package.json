@@ -75,5 +75,8 @@
   },
   "private": true,
   "name": "CryptoDash",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
+  }
 }
