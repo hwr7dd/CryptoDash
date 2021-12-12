@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 import { Shadow } from "react-native-shadow-2";
 import { Text, View } from "../components/Themed";
-// import { RootTabScreenProps } from '../types';
+// import Login1 from "../components/login";
 import { Button } from "react-native";
 const testuser = [
   {
@@ -53,6 +53,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome</Text>
+      {/* <Login1 /> */}
       {isInfoVisible ? (
         <Text style={styles.subtitle}>{person.name}</Text>
       ) : (

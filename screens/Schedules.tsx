@@ -5,19 +5,18 @@ import { Text, View } from "../components/Themed";
 import Scheduler from "../components/table";
 import { RootTabScreenProps } from "../types";
 import { Button } from "react-native";
+import { FAB } from "react-native-elements";
+import DropDownPicker from "react-native-dropdown-picker";
 
 export default function Schedules({
   navigation,
 }: RootTabScreenProps<"Schedules">) {
   let selectedDate: Date = new Date("2021-01-01");
-  const [dateData, setDateData] = useState<Date>(selectedDate);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Schedules</Text>
       <Scheduler />
-      {/* <Button title="Test" onPress={() => navigation.navigate("Modal")}>
-        test
-      </Button> */}
     </View>
   );
 }

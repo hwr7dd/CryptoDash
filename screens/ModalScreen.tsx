@@ -8,7 +8,11 @@ import { useState, useRef } from "react";
 import * as React from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useEffect } from "react";
-import OverlayExample from "../components/popup";
+import { Modal } from "../components/modeal";
+import { DataTable } from "react-native-paper";
+import { FAB } from "react-native-elements";
+import { local } from "d3";
+
 export interface datat {
   id?: number;
   name?: string;
@@ -40,8 +44,67 @@ let scheduler = [
 export default function ModalScreen() {
   const route = useRoute<RouteProp<RootStackParamList, "Modal">>();
   const chosenData: any = scheduler.find((e) => e.id === route.params.id);
+  const [data1, setdata1] = useState(
+    JSON.parse(localStorage.getItem("data1")!)
+  );
+  const [data3, setData3] = useState("test");
+  let count = 0;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const submitPress: any = () => {
+    if (data1) {
+      setIsModalVisible(true);
+      count += 1;
+    }
+  };
+  useEffect(() => {
+    localStorage.setItem(
+      "data1",
+      JSON.stringify({
+        ...data1,
+        starthour: value1,
+        endhour: value3,
+      })
+    );
+  }, [data1]);
+
+  const [datafull, setDatafull] = useState(
+    JSON.parse(localStorage.getItem("data2")!)
+  );
+  const [countd, setCountd] = useState(false);
+  const [data23, setDat] = useState(JSON.parse(localStorage.getItem("data2")!));
+  const handleNew = () => {
+    setdata1({ ...data1, starthour: value1, endhour: value3 });
+    setCountd(true);
+    // const x = JSON.parse(localStorage.getItem("data2")!);
+    // countd += 1;
+    // setData3(x.filter((e: any) => e.id !== data1.id));
+    // setDatafull(x.filter((e: any) => e.id !== data1.id));
+    // localStorage.removeItem('data')
+    // localStorage.setItem("data1", data1);
+    // setData3(localStorage.getItem("data1"));
+    setIsModalVisible(() => !isModalVisible);
+  };
+  const [dataform, setDataform] = useState(
+    JSON.parse(localStorage.getItem("data2")!)
+  );
+  const [doneEdit, setDonedit] = useState(false);
+  if (countd) {
+    setDatafull([...datafull, data1]);
+    localStorage.setItem("data2", JSON.stringify(datafull));
+    ("set data");
+    setCountd(false);
+    setDonedit(true);
+    // setDatafull([...datafull, data1]);
+    // (JSON.stringify(datafull));
+  }
+  if (doneEdit) {
+    localStorage.setItem("data2", JSON.stringify(datafull));
+    setDonedit(false);
+  }
+  const handleDecline = () => setIsModalVisible(() => !isModalVisible);
   const [open1, setOpen1] = useState(true);
-  const [value1, setValue1] = useState(chosenData!.starthour);
+  // const [value1, setValue1] = useState(data1.starthour);
+  const [value1, setValue1] = useState(data1.starthour);
   const [items1, setItems1] = useState([
     { label: "1", value: 1 },
     { label: "2", value: 2 },
@@ -70,7 +133,10 @@ export default function ModalScreen() {
   ]);
 
   const [open3, setOpen3] = useState(true);
-  const [value3, setValue3] = useState(chosenData!.endhour);
+  // const [value3, setValue3] = useState(data1.endhour);
+
+  const [value3, setValue3] = useState(data1.endhour);
+
   const [items3, setItems3] = useState([
     { label: "1", value: 1 },
     { label: "2", value: 2 },
@@ -97,27 +163,49 @@ export default function ModalScreen() {
     { label: "23", value: 23 },
     { label: "24", value: 24 },
   ]);
-  const [data2, setData2] = useState(chosenData);
-  const count = useRef(0);
-  const submitPress: any = () => {
-    if (chosenData) {
-      setData2({ ...data2, starthour: value1, endhour: value3 });
-      count.current = count.current + 1;
-    }
-  };
-  useEffect(() => {
-    if (count.current > 0) {
-      <OverlayExample></OverlayExample>;
-    }
-  }, [data2]);
-
+  const [adding, setAdd] = useState(false);
+  const [done, setDone] = useState(true);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{chosenData?.name}</Text>
-      <View style={styles.data}>
-        <Text>{chosenData?.name}</Text>
-        <Text>{data2.starthour}</Text>
-      </View>
+      <Modal isVisible={isModalVisible}>
+        <Modal.Container>
+          <View style={styles.modal}>
+            <Modal.Header title="Are you sure you want to change the schedule?" />
+            <Modal.Body></Modal.Body>
+            <Modal.Footer>
+              <View style={styles.timeCont}>
+                <View style={styles.button}>
+                  <Button
+                    title="Go Back"
+                    onPress={handleDecline}
+                    color="#E09090"
+                  />
+                </View>
+                <View style={styles.button}>
+                  <Button
+                    title="Change it!"
+                    onPress={handleNew}
+                    color="#2BB673"
+                  />
+                </View>
+              </View>
+            </Modal.Footer>
+          </View>
+        </Modal.Container>
+      </Modal>
+      <DataTable>
+        <DataTable.Header>
+          <DataTable.Title>Schedule Name</DataTable.Title>
+          <DataTable.Title numeric>Start Time (24 hour format)</DataTable.Title>
+          <DataTable.Title numeric>End Time (24 hour format)</DataTable.Title>
+        </DataTable.Header>
+
+        <DataTable.Row>
+          <DataTable.Cell>{data1.name}</DataTable.Cell>
+          <DataTable.Cell numeric>{data1.starthour}</DataTable.Cell>
+          <DataTable.Cell numeric>{data1.endhour}</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
       <View
         style={styles.separator}
         lightColor="#eee"
@@ -171,10 +259,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   data: {
     backgroundColor: "yellow",
+    flexDirection: "row",
+  },
+  dataItem: {
+    marginHorizontal: 20,
   },
   title: {
     fontSize: 20,
@@ -183,10 +275,16 @@ const styles = StyleSheet.create({
   timeCont: {
     flexDirection: "row",
     justifyContent: "center",
-    paddingHorizontal: 50,
+    marginLeft: 20,
   },
   picker: {
     marginHorizontal: 10,
+  },
+  modal: {
+    width: "100%",
+    height: "90%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   submitButton: {
     marginTop: 20,
@@ -196,7 +294,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
   },
-
+  button: {
+    borderRadius: 50,
+  },
   time: {
     flexDirection: "column",
     justifyContent: "center",
@@ -208,7 +308,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   timeText: {
-    fontSize: 30,
+    fontSize: 20,
   },
   separator: {
     marginVertical: 30,

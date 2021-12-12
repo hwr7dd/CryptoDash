@@ -64,7 +64,11 @@ function RootNavigator() {
         options={{ title: "Oops!" }}
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen
+          name="Modal"
+          component={ModalScreen}
+          options={{ title: "Schedule Editor" }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );

@@ -2,10 +2,10 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import Charted from "../components/barchart";
 import Pied from "../components/Piechart";
+// import DeviceOn from "../components/turnon";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import { Icon } from "react-native-elements";
-
 const temp = 39;
 const humid = 49;
 
