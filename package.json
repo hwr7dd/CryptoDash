@@ -59,7 +59,6 @@
         "recharts": "^2.1.6",
         "styled-components": "^5.3.3",
         "toggle-switch-react-native": "^3.3.0",
-        "tuyapi": "github:codetheweb/tuyapi",
         "uuid": "^8.3.2"
     },
     "devDependencies": {
