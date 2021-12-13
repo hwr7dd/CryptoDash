@@ -8,12 +8,11 @@ import awsconfig from "./src/aws-exports";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import Amplify, { Auth } from "aws-amplify";
-
+import Amplify from "aws-amplify";
+Amplify.configure(awsconfig);
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-  Amplify.configure(awsconfig);
 
   if (!isLoadingComplete) {
     return null;
