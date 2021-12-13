@@ -11,8 +11,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 Parse.setAsyncStorage(AsyncStorage);
 Parse.initialize(
-  "fn0Quvuc1Jcao662UK3B0VhNBGd7NFrlAooNGpPT",
-  "2YzGiJ98tpa0aUziKsbqC9EoU2vAFrWU0FTWwuc4"
+  API_KEY,
+  JAVASCRIPT_KEY
 );
 Parse.serverURL = "https://parseapi.back4app.com/";
 function App() {
