@@ -2,14 +2,15 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Header } from "react-native/Libraries/NewAppScreen";
-//@ts-ignore
-import { withAuthenticator } from "aws-amplify-react-native";
-import awsconfig from "./src/aws-exports";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import Amplify from "aws-amplify";
-Amplify.configure(awsconfig);
+import Parse from "parse/react-native.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+Parse.setAsyncStorage(AsyncStorage);
+//You need to copy BOTH the the Application ID and the Javascript Key from: Dashboard->App Settings->Security & Keys
+Parse.initialize(process.env.APPLICATION_ID!, process.env.JAVASCRIPT_KEY);
+Parse.serverURL = "https://parseapi.back4app.com/";
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
@@ -25,4 +26,4 @@ function App() {
     );
   }
 }
-export default withAuthenticator(App);
+export default App;
