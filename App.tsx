@@ -7,14 +7,17 @@ import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 import Parse from "parse/react-native.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+// import Parse from "parse/react-native.js";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 Parse.setAsyncStorage(AsyncStorage);
-//You need to copy BOTH the the Application ID and the Javascript Key from: Dashboard->App Settings->Security & Keys
-Parse.initialize(process.env.APPLICATION_ID!, process.env.JAVASCRIPT_KEY);
+Parse.initialize(
+  "fn0Quvuc1Jcao662UK3B0VhNBGd7NFrlAooNGpPT",
+  "2YzGiJ98tpa0aUziKsbqC9EoU2vAFrWU0FTWwuc4"
+);
 Parse.serverURL = "https://parseapi.back4app.com/";
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-
   if (!isLoadingComplete) {
     return null;
   } else {

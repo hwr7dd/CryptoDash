@@ -12,7 +12,7 @@ import { Modal } from "../components/Modeal";
 import { DataTable } from "react-native-paper";
 import { FAB } from "react-native-elements";
 import { local } from "d3";
-
+import Axios from "axios";
 export interface datat {
   id?: number;
   name?: string;
@@ -43,6 +43,22 @@ let scheduler = [
 
 export default function ModalScreen() {
   const route = useRoute<RouteProp<RootStackParamList, "Modal">>();
+  function newUser(i: any) {
+    Axios.put(
+      `https://parseapi.back4app.com/classes/${JSON.stringify(i.id)}`,
+      {
+        i,
+      },
+      {
+        headers: {
+          "X-Parse-Application-Id": "fn0Quvuc1Jcao662UK3B0VhNBGd7NFrlAooNGpPT",
+          "X-Parse-REST-API-Key": "rGgnTxSVUJ1Tm9T8jioNUTr4DsZykqMBtynnvptn",
+          "X-Parse-Revocable-Session": "1",
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => console.log(response));
+  }
   const chosenData: any = scheduler.find((e) => e.id === route.params.id);
   const [data1, setdata1] = useState(
     JSON.parse(localStorage.getItem("data1")!)
@@ -100,6 +116,9 @@ export default function ModalScreen() {
   if (doneEdit) {
     localStorage.setItem("data2", JSON.stringify(datafull));
     setDonedit(false);
+    datafull.map(function (i: any) {
+      newUser(i);
+    });
   }
   const handleDecline = () => setIsModalVisible(() => !isModalVisible);
   const [open1, setOpen1] = useState(true);

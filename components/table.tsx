@@ -19,6 +19,7 @@ import { useState } from "react";
 import { useEffect, useRef } from "react";
 import { useCallback } from "react";
 import { style } from "d3";
+import Axios from "axios";
 export default function Scheduler() {
   let scheduler = [
     {
@@ -40,9 +41,10 @@ export default function Scheduler() {
       endhour: 21,
     },
   ];
-  const [selectedSchedule, setSelectedSchedule] = useState(scheduler);
+  const [selectedSchedule, setSelectedSchedule] = useState([]);
   const isFocus = useIsFocused();
   const [c, setC] = useState(false);
+
   useEffect(() => {
     setSelectedSchedule(JSON.parse(localStorage.getItem("data2")!));
   }, [isFocus]);
@@ -75,7 +77,7 @@ export default function Scheduler() {
           onPress={actionLi}
           color="#FFECAD"
         ></Button>
-        <Button title="Delete" onPress={deleteLi} color="#E09090"></Button>
+        <Button title="Del" onPress={deleteLi} color="#E09090"></Button>
       </View>
     );
   };
